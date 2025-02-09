@@ -1,4 +1,3 @@
-import classes from "./ProductDetail.module.css";
 import LayOut from "../../Components/LayOut/LayOut";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -27,7 +26,11 @@ function ProductDetail() {
   }, []);
   return (
     <LayOut>
-      {isLoading ? <Loader /> : <ProductCard product={product} />}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <ProductCard product={product} flex={true} renderDesc={true} />
+      )}
     </LayOut>
   );
 }
