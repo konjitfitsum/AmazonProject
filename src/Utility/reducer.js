@@ -14,11 +14,11 @@ export const reducer = (state, action) => {
           : [...state.basket], // Prevents undefined items
       };
 
-    case Type.REMOVE_FROM_BASKET:
-      return {
-        ...state,
-        basket: state.basket.filter((item) => item.id !== action.id),
-      };
+    // case Type.REMOVE_FROM_BASKET:
+    //   return {
+    //     ...state,
+    //     basket: state.basket.filter((item) => item.id !== action.id),
+    //   };
 
     default:
       return state;

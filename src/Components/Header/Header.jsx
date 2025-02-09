@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <>
-      <section>
+      <section className={classes.fixed}>
         <div className={classes.header__container}>
           {/* Logo Section */}
           <div className={classes.logo__container}>
