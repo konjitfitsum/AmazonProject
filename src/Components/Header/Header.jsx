@@ -1,11 +1,15 @@
-import {} from "react";
+import { useContext } from "react";
 import classes from "./Header.module.css";
 import { FaLocationDot } from "react-icons/fa6";
 import LowerHeader from "./LowerHeader.jsx";
-import { FaSearch } from "react-icons/fa";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { DataContext } from "../DataProvider/DataProvider.jsx";
+
 const Header = () => {
+  const [{ basket }] = useContext(DataContext) || { basket: [] }; // Ensure basket is defined
+  console.log(basket?.length || 0);
+
   return (
     <>
       <section>
@@ -59,7 +63,7 @@ const Header = () => {
             </Link>
             <Link to="/cart" className={classes.cart}>
               <FaShoppingCart size={35} />
-              <span>0</span>
+              <span>{basket?.length || 0}</span> {/* Safe fallback */}
             </Link>
           </div>
         </div>
