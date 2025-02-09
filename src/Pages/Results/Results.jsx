@@ -5,8 +5,10 @@ import axios from "axios";
 import { productUrl } from "../../Api/endPoints";
 import { useEffect, useState } from "react";
 import ProductCard from "../../Components/Product/ProductCard";
+import Loader from "../../Components/Loader/Loder";
 function Results() {
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { categoryName } = useParams();
   useEffect(() => {
     axios
@@ -25,11 +27,15 @@ function Results() {
         <h1 style={{ padding: "30px" }}>Results</h1>
         <p style={{ padding: "30px" }}>Category / {categoryName}</p>
         <hr />
-        <div className={classes.products_container}>
-          {results?.map((product) => {
-            <ProductCard key={product.id} product={product} />;
-          })}
-        </div>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className={classes.products_container}>
+            {results?.map((product) => {
+              <ProductCard key={product.id} product={product} />;
+            })}
+          </div>
+        )}
       </section>
     </LayOut>
   );
