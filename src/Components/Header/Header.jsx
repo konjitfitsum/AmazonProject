@@ -9,7 +9,9 @@ import { DataContext } from "../DataProvider/DataProvider.jsx";
 const Header = () => {
   const [{ basket }] = useContext(DataContext) || { basket: [] }; // Ensure basket is defined
   console.log(basket?.length || 0);
-
+  const totalItem = basket?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0);
   return (
     <>
       <section className={classes.fixed}>
@@ -63,7 +65,7 @@ const Header = () => {
             </Link>
             <Link to="/cart" className={classes.cart}>
               <FaShoppingCart size={35} />
-              <span>{basket?.length || 0}</span> {/* Safe fallback */}
+              <span>{totalItem}</span> {/* Safe fallback */}
             </Link>
           </div>
         </div>
