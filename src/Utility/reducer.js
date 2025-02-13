@@ -1,4 +1,4 @@
-import * as Type from "./action.type"; // Fixed import
+import { Type } from "./action.type";
 
 export const initialState = {
   basket: [],
@@ -7,19 +7,27 @@ export const initialState = {
 export const reducer = (state, action) => {
   switch (action.type) {
     case Type.ADD_TO_BASKET:
-      return {
-        ...state,
-        basket: action.item
-          ? [...state.basket, action.item]
-          : [...state.basket], // Prevents undefined items
-      };
+      // * check if the item exists
+      const existingItem = state.basket.find(
+        (item) => item.id === action.item.id
+      );
+      if (!existingItem) {
+        return {
+          ...state,
+          basket: [...state.basket, { ...action.item, amount: 1 }],
+        };
+      } else {
+        const updatedBasket = state.basket.map((item) => {
+          return item.id === action.item.id
+            ? { ...item, amount: item.amount + 1 }
+            : item;
+        });
 
-    // case Type.REMOVE_FROM_BASKET:
-    //   return {
-    //     ...state,
-    //     basket: state.basket.filter((item) => item.id !== action.id),
-    //   };
-
+        return {
+          ...state,
+          basket: updatedBasket,
+        };
+      }
     default:
       return state;
   }

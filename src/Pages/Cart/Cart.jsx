@@ -8,8 +8,10 @@ import classes from "./Cart.module.css";
 
 function Cart() {
   const [{ basket, user }, dispatch] = useContext(DataContext);
-  const total = basket.reduce((amount, item) => item.price + amount, 0);
-
+  const total = basket.reduce((amount, item) => {
+    return item.price * item.amount + amount;
+  }, 0);
+  // console.log(basket);
   return (
     <LayOut>
       <section className={classes.container}>
