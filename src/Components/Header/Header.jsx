@@ -30,7 +30,7 @@ const Header = () => {
               </span>
               <div>
                 <p>Deliver to</p>
-                <span>Kenya</span>
+                <span>United Kingdom</span>
               </div>
             </div>
           </div>
